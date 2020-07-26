@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * @author liuya
  * @作者 江南一点雨
  * @微信公众号 江南一点雨
  * @网站 http://www.javaboy.org
@@ -42,7 +43,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             } catch (IOException e) {
             }finally {
                 String code = loginData.get("code");
-                checkCode(response, code, verify_code);
+                //checkCode(response, code, verify_code);
             }
             String username = loginData.get(getUsernameParameter());
             String password = loginData.get(getPasswordParameter());
@@ -61,12 +62,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             sessionRegistry.registerNewSession(request.getSession(true).getId(), principal);
             return this.getAuthenticationManager().authenticate(authRequest);
         } else {
-            checkCode(response, request.getParameter("code"), verify_code);
+           //checkCode(response, request.getParameter("code"), verify_code);
             return super.attemptAuthentication(request, response);
         }
     }
 
-    public void checkCode(HttpServletResponse resp, String code, String verify_code) {
+    private void checkCode(HttpServletResponse resp, String code, String verify_code) {
         if (code == null || verify_code == null || "".equals(code) || !verify_code.toLowerCase().equals(code.toLowerCase())) {
             //验证码不正确
             throw new AuthenticationServiceException("验证码不正确");

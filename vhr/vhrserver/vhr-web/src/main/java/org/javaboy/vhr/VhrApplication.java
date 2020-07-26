@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+/**
+ * @author liuya
+ */
 @SpringBootApplication
 @EnableCaching
 @MapperScan(basePackages = "org.javaboy.vhr.mapper")
